@@ -26,6 +26,10 @@ body {
     color: #AF6B1E;
 }
 
+.c-nav-color{
+    color:black !important;
+}
+
 .c-nav-link {
     font-size: large;
 }
