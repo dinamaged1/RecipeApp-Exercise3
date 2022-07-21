@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/RazorPagesRecipes.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header class="c-header fixed-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
@@ -19,19 +19,35 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex  justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex  justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav flex-grow-1 flex-row-reverse">
                         <li class="nav-item c-nav-item">
-                            <a class="nav-link c-nav-link" asp-area="" asp-page="/Index">Privacy</a>
+                            <a class="nav-link c-nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item c-nav-item">
-                            <a class="nav-link c-nav-link" asp-area="" asp-page="/Index">Categories</a>
+                        <li class="nav-item c-nav-item dropdown">
+                            <a class="nav-link c-nav-links dropdown-toggle" href="#" id="navbarDropdownCat" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                                <li><a class="dropdown-item" href="#">Show</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item c-nav-item">
-                            <a class="nav-link c-nav-link" asp-area="" asp-page="/Index">Recipes</a>
+                        <li class="nav-item c-nav-item dropdown">
+                            <a class="nav-link c-nav-link dropdown-toggle" href="#" id="navbarDropdownRec" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Recipes
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownRec">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link c-nav-link" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link c-nav-link @((string?)ViewData["Title"]=="Home page" ? "active":"")" asp-area="" asp-page="/Index">Home</a>
                         </li>
                     </ul>
                 </div>

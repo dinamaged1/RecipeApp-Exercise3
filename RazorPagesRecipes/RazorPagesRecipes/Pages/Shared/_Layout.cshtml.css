@@ -47,3 +47,12 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.c-header{
+    position:sticky;
+}
+
+.active{
+    color:aquamarine;
+    ba
+}

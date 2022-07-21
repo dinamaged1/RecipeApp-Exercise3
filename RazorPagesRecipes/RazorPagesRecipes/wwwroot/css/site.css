@@ -17,21 +17,24 @@ body {
     margin-bottom: 60px;
 }
 
+.c-header {
+    position: sticky;
+}
+
 .c-nav-item {
     margin-left: 3%;
     color: #AF6B1E;
 }
 
-.c-nav-link{
-    font-size:large;
+.c-nav-link {
+    font-size: large;
 }
 
 .c-section1 {
-    min-height: 829px;
+    min-height: 710px;
     padding: 0px !important;
     margin: 0px !important;
-    position:relative;
-    
+    position: relative;
 }
 
 .c-first-color {
@@ -57,13 +60,41 @@ body {
 .c-font {
     font-family: Merriweather, serif !important;
 }
-.c-read-more-button{
-    color:black;
-    text-decoration:none;
-    border-style:solid;
-    margin-top:20%;
-    padding:3%;
+
+.c-read-more-button {
+    color: black;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+    margin: 30px auto 0 0;
+    padding: 10px 30px;
 }
-.c-read-more-button:hover{
-    color:dimgrey;
+
+    .c-read-more-button:hover {
+        color: dimgrey;
+    }
+
+.c-second-color-div {
+    position: absolute;
+    top: 37%;
+    margin: 3%;
+    display: flex;
+}
+
+.c-first-img-home {
+    position: relative;
+    left: 8%;
+}
+
+.c-third-img-home {
+    position: relative;
+    bottom: 100px;
+}
+
+.c-shadow {
+    filter: drop-shadow(3px 5px 5px black);
+}
+
+.c-space-div {
+    width: 80vh;
 }
