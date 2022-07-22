@@ -126,6 +126,10 @@ body {
 .c-category-text {
   font-weight:400;
 }
-.c-categories-header{
 
+.c-category-remove-div {
+    margin-right:5%;
+}
+.c-category-remove-div {
+    margin-left: 4%
 }
