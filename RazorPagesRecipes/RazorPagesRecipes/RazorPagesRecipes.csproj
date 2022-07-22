@@ -10,4 +10,8 @@
     <None Include="wwwroot\Images\logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Categories\" />
+  </ItemGroup>
+
 </Project>

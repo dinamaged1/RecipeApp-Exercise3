@@ -102,3 +102,30 @@ body {
 .c-space-div {
     width: 80vh;
 }
+
+.c-categories-page {
+    background-color: #efe2d5;
+    height: 100%;
+    height: 100vh;
+    padding:0px;
+}
+
+.c-category-row {
+    background-color: white;
+    min-height: 10%;
+    border-radius: 15px;
+    filter: drop-shadow(3px 3px 4px grey);
+    display: flex;
+    align-items: center;
+}
+.c-category-text-div {
+    font-size: 20px;
+    margin-left: 3%;
+    flex-grow: 8;
+}
+.c-category-text {
+  font-weight:400;
+}
+.c-categories-header{
+
+}
