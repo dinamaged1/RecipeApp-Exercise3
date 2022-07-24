@@ -26,8 +26,8 @@ body {
     color: #AF6B1E;
 }
 
-.c-nav-color{
-    color:black !important;
+.c-nav-color {
+    color: black !important;
 }
 
 .c-nav-link {
@@ -107,7 +107,7 @@ body {
     background-color: #efe2d5;
     height: 100%;
     height: 100vh;
-    padding:0px;
+    padding: 0px;
 }
 
 .c-category-row {
@@ -118,18 +118,47 @@ body {
     display: flex;
     align-items: center;
 }
+
 .c-category-text-div {
     font-size: 20px;
     margin-left: 3%;
     flex-grow: 8;
 }
+
 .c-category-text {
-  font-weight:400;
+    font-weight: 400;
 }
 
 .c-category-remove-div {
-    margin-right:5%;
+    margin-right: 5%;
+    margin-left: 4%;
+    cursor: pointer;
 }
+
 .c-category-remove-div {
-    margin-left: 4%
+    margin-right: 5%;
+    margin-left: 4%;
+    cursor: pointer;
+}
+
+    .c-category-remove-div:hover {
+        cursor: pointer;
+        color: gray;
+    }
+
+.c-category-edit-div:hover {
+    cursor: pointer;
+    color: gray;
+}
+
+.c-confirm-button {
+    border-radius: 40px;
+    color: white;
+    background-color: #BE6F5E;
+}
+.c-edit-modal-body {
+    margin: 20px 0px;
+}
+.c-modal-footer{
+    border-top:none !important;
 }

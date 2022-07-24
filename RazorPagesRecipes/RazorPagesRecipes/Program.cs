@@ -1,7 +1,21 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Build a config object, using env vars and JSON providers.
+IConfiguration config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddEnvironmentVariables()
+    .Build();
+
+// Get values from the config given their key and add it to base address of the client
+var url = config.GetRequiredSection("url").Get<string>();
+builder.Services.AddHttpClient("recipe", (client) =>
+{
+    client.BaseAddress = new Uri(url);
+});
 
 var app = builder.Build();
 
