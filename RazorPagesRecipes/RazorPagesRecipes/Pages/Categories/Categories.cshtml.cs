@@ -11,8 +11,11 @@ namespace RazorPagesRecipes.Pages.Categories
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly HttpClient _httpClient;
         public bool IsRequestSucceed { get; }
-        public List<string> Categories { get; set; }
-        public string CategotyNew { get; set; }
+        public List<string> Categories { get; set; }=new List<string>();
+        [BindProperty]
+        public string CategoryNew { get; set; }
+        [BindProperty]
+        public string CategoryOld { get; set; }
         public CategoriesModel(IHttpClientFactory client)
         {
             _httpClientFactory = client;
@@ -27,16 +30,16 @@ namespace RazorPagesRecipes.Pages.Categories
             Categories = JsonSerializer.Deserialize<List<string>>(categoryData);
         }
 
-        public async Task<IActionResult> onPostUpdate(string oldCategoryName)
+        public async Task<IActionResult> OnPostUpdate()
         {
             var newCategoryJson = new StringContent(
-                JsonSerializer.Serialize(CategotyNew),
+                JsonSerializer.Serialize(CategoryNew),
                 Encoding.UTF8,
                 "application/json");
 
             using var httpResponseMessage =
-                await _httpClient.PutAsync($"/category/{oldCategoryName}", newCategoryJson);
-
+                await _httpClient.PutAsync($"/category/{CategoryOld}", newCategoryJson);
+            await OnGet();
             httpResponseMessage.EnsureSuccessStatusCode();
             return Page();
         }
