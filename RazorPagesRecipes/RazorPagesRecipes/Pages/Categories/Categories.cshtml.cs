@@ -11,16 +11,20 @@ namespace RazorPagesRecipes.Pages.Categories
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly HttpClient _httpClient;
         public bool IsRequestSucceed { get; }
-        public List<string> Categories { get; set; }=new List<string>();
+        public List<string> Categories { get; set; } = new List<string>();
         [BindProperty]
         public string CategoryNew { get; set; }
         [BindProperty]
         public string CategoryOld { get; set; }
+        [BindProperty]
+        public string ToBeDeletedCategory { get; set; }
         public CategoriesModel(IHttpClientFactory client)
         {
             _httpClientFactory = client;
             _httpClient = _httpClientFactory.CreateClient("recipe");
         }
+
+        // Get all categories
         public async Task OnGet()
         {
             var httpResponseMessage =
@@ -30,17 +34,47 @@ namespace RazorPagesRecipes.Pages.Categories
             Categories = JsonSerializer.Deserialize<List<string>>(categoryData);
         }
 
-        public async Task<IActionResult> OnPostUpdate()
+        // Add new category
+        public async Task<IActionResult> OnPostAdd()
         {
-            var newCategoryJson = new StringContent(
-                JsonSerializer.Serialize(CategoryNew),
-                Encoding.UTF8,
-                "application/json");
+            var categoryItemJson = new StringContent(
+                        JsonSerializer.Serialize(CategoryNew),
+                        Encoding.UTF8,
+                        "application/json");
 
             using var httpResponseMessage =
-                await _httpClient.PutAsync($"/category/{CategoryOld}", newCategoryJson);
-            await OnGet();
+                await _httpClient.PostAsync("/category", categoryItemJson);
+
             httpResponseMessage.EnsureSuccessStatusCode();
+            await OnGet();
+            return Page();
+        }
+
+        // Edit a category
+        public async Task<IActionResult> OnPostUpdate()
+        {
+            if (CategoryNew != CategoryOld)
+            {
+                var newCategoryJson = new StringContent(
+                    JsonSerializer.Serialize(CategoryNew),
+                    Encoding.UTF8,
+                    "application/json");
+
+                using var httpResponseMessage =
+                    await _httpClient.PutAsync($"/category/{CategoryOld}", newCategoryJson);
+                httpResponseMessage.EnsureSuccessStatusCode();
+            }
+            await OnGet();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostDelete()
+        {
+            using var httpResponseMessage =
+                await _httpClient.DeleteAsync($"/category/{ToBeDeletedCategory}");
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+            await OnGet();
             return Page();
         }
     }

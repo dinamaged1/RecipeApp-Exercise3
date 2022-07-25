@@ -117,7 +117,15 @@ body {
     filter: drop-shadow(3px 3px 4px grey);
     display: flex;
     align-items: center;
+    transition: margin-bottom 1s, margin-top 1s,min-height 1s;
 }
+
+    .c-category-row:hover {
+        margin-bottom: 3% !important;
+        margin-top:3% !important;
+        min-height:11%;
+
+    }
 
 .c-category-text-div {
     font-size: 20px;
@@ -156,9 +164,60 @@ body {
     color: white;
     background-color: #BE6F5E;
 }
+
+.c-cancel-button {
+    background-color: none;
+    border-radius: 40px;
+    border-color: #BE6F5E;
+}
+
+.c-add-button {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 40px;
+    border-color: black;
+    font-weight: 500;
+}
+
 .c-edit-modal-body {
     margin: 20px 0px;
 }
-.c-modal-footer{
-    border-top:none !important;
+
+.c-modal-footer {
+    border-top: none !important;
+}
+
+.c-delete-modal-header {
+    border-bottom: none;
+}
+
+.c-delete-confirmation-text {
+    margin-top: 5%
+}
+
+.c-delete-modal-title {
+    padding-left: 8rem !important;
+    margin-top: 5px;
+}
+
+.c-delete-trash {
+    border-radius: 50%;
+    border-color: #e62222;
+    border-style: solid;
+    width: 70px;
+}
+
+.c-delete-modal-content {
+    width: 75%;
+}
+
+.c-cancel-delete {
+    border-color: #E62222;
+    padding: 0.4rem 1rem;
+}
+
+.c-delete-button {
+    border-radius: 40px;
+    color: white;
+    background-color: #E62222;
 }
