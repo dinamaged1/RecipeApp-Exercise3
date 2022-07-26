@@ -117,11 +117,13 @@ body {
     filter: drop-shadow(3px 3px 4px grey);
     display: flex;
     align-items: center;
-    transition: transform 1s;
+    transition: margin-bottom 1s, margin-top 1s,min-height 1s;
 }
 
     .c-category-row:hover {
-        transform:translateY(-10px);
+        margin-bottom: 3% !important;
+        margin-top:3% !important;
+        min-height:11%;
 
     }
 
