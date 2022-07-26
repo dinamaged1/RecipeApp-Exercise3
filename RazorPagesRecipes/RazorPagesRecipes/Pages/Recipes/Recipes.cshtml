@@ -24,22 +24,30 @@
                     <h5 class="modal-title" id="addModalLabel">Add New Recipe</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form asp-page-handler="add" method="post">
+                <form asp-page-handler="add" method="post" enctype="multipart/form-data">
                     <div class="modal-body c-edit-modal-body">
                         <div class="form-group">
                             <label class="mb-2">Recipe Title</label>
                             <input type="text" id="RecipeTitle" class="form-control" value="" />
                             <label class="mb-2">Ingredients</label>
-                            <input type="text" id="RecipeIngredients" class="form-control" value="" />
+                            <textarea class="form-control" type="text" id="RecipeIngredients" value=""> </textarea>
                             <label class="mb-2">Instructions</label>
-                            <input type="text" id="RecipeInstructions" class="form-control" value="" />
-                            <label>Categories</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Default checkbox
-                                </label>
-                            </div>
+                            <textarea class="form-control" type="text" id="RecipeInstructions" value=""></textarea>
+                            <div class="m-4"></div>
+                            <label class="mb-2" asp-for="@Model.RecipeImage">Recipe Image</label>
+                            <input class="form-control" asp-for="@Model.RecipeImage" type="file" />
+                            <div class="m-4"></div>
+                            @for (int i = 0; i < Model.Categories.Count; i++)
+                            {
+                                var category = Model.Categories[i];
+                                <div class="form-group">
+                                    <input class="form-check-input c-form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        @category
+                                    </label>
+                                </div>
+                            }
+
                         </div>
                     </div>
                     <div class="modal-footer c-modal-footer">
