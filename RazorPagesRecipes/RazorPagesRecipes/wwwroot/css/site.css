@@ -121,8 +121,7 @@ body {
 }
 
     .c-category-row:hover {
-        transform:translateY(-10px)
-
+        transform: translateY(-10px)
     }
 
 .c-category-text-div {
@@ -228,4 +227,56 @@ body {
 .form-control:focus {
     border-color: #cbacaa;
     box-shadow: 0 0 0 0.25rem #cbacaa63;
+}
+
+.c-recipe-header {
+    margin-left: 7% !important;
+    margin-right: 0%;
+}
+
+.c-font-color {
+    color: #8c412ab3;
+}
+.c-recipe-page {
+    background-color: #f2f2f2;
+    height: 100%;
+    padding: 0px;
+}
+
+.c-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 100px;
+}
+
+    .c-cards-container > div {
+        background-color: #f1f1f1;
+        width: 300px;
+        margin: 10px;
+        text-align: center;
+        font-size: 10px;
+    }
+
+.c-card-img {
+    border-radius: 50%;
+    padding: 10%;
+    width:100%;
+    height:65%
+}
+.c-details-btn {
+    color: black;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d9c6c0b3;
+    background-color: #d9c6c052;
+    padding: 10px 30px;
+}
+
+.c-add--recipe-button {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 40px;
+    border-color: #d9c6c0b3;
+    font-weight: 500;
 }

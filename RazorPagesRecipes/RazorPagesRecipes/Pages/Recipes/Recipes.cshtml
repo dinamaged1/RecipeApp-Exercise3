@@ -2,13 +2,13 @@
 @model RazorPagesRecipes.Pages.Recipes.RecipesModel
 @{
 }
-<div class="c-categories-page">
+<div class="c-recipe-page">
     <div class="row">
-        <h1 class="col-10 c-font c-categories-header pt-5 ms-5">
-            Recipes
+        <h1 class="col-9 c-font c-recipe-header c-font-color pt-5 ms-5">
+            Our Recipes
         </h1>
         <div class="col pt-5">
-            <button class="btn c-add-button" data-bs-toggle="modal" data-bs-target="#addModal">
+            <button class="btn c-add--recipe-button c-font-color" data-bs-toggle="modal" data-bs-target="#addModal">
                 Add new
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
                     <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -16,47 +16,63 @@
                 </svg>
             </button>
         </div>
-    </div>
-    <div class="modal fade" id="addModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Recipe</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="c-cards-container">
+            @for (int i = 0; i < Model.Recipes.Count; i++)
+            {
+                var recipe = Model.Recipes[i];
+                <div class="card">
+                    <img src="@recipe.Imagepath" class="card-img-top c-card-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title c-font-color">@recipe.Title</h5>
+                        <a class="c-details-btn mt-3 btn">DETAILS</a>
+                    </div>
                 </div>
-                <form asp-page-handler="add" method="post" enctype="multipart/form-data">
-                    <div class="modal-body c-edit-modal-body">
-                        <div class="form-group">
-                            <label class="mb-2">Recipe Title</label>
-                            <input type="text" id="RecipeTitle" class="form-control" value="" />
-                            <label class="mb-2">Ingredients</label>
-                            <textarea class="form-control" type="text" id="RecipeIngredients" value=""> </textarea>
-                            <label class="mb-2">Instructions</label>
-                            <textarea class="form-control" type="text" id="RecipeInstructions" value=""></textarea>
-                            <div class="m-4"></div>
-                            <label class="mb-2" asp-for="@Model.RecipeImage">Recipe Image</label>
-                            <input class="form-control" asp-for="@Model.RecipeImage" type="file" />
-                            <div class="m-4"></div>
-                            @for (int i = 0; i < Model.Categories.Count; i++)
-                            {
-                                var category = Model.Categories[i];
-                                <div class="form-group">
-                                    <input class="form-check-input c-form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        @category
-                                    </label>
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                    <div class="modal-footer c-modal-footer">
-                        <button type="button" class="btn c-cancel-button" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                        <button type="submit" class="btn c-confirm-button">Confirm</button>
-                    </div>
-                </form>
+            }
+        </div>
+    
+</div>
+<div class="modal fade" id="addModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add New Recipe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form asp-page-handler="add" method="post" enctype="multipart/form-data">
+                <div class="modal-body c-edit-modal-body">
+                    <div class="form-group">
+                        <label class="mb-2">Recipe Title</label>
+                        <input type="text" id="RecipeTitle" class="form-control" value="" name="title" />
+                        <label class="mb-2">Ingredients</label>
+                        <textarea class="form-control" type="text" id="RecipeIngredients" value="" name="ingredients"> </textarea>
+                        <label class="mb-2">Instructions</label>
+                        <textarea class="form-control" type="text" id="RecipeInstructions" value="" name="instructions"></textarea>
+                        <div class="m-4"></div>
+                        <label class="mb-2" asp-for="@Model.RecipeImage">Recipe Image</label>
+                        <input class="form-control" asp-for="@Model.RecipeImage" type="file" />
+                        <div class="m-4"></div>
+                        @for (int i = 0; i < Model.Categories.Count; i++)
+                        {
+                            var index = i;
+                            var category = Model.Categories[i];
+                            <div class="form-group">
+                                <input asp-for="@Model.IsCheckedCategory[index]" class="form-check-input c-form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    @category
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="modal-footer c-modal-footer">
+                    <button type="button" class="btn c-cancel-button" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button type="submit" class="btn c-confirm-button">Confirm</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
