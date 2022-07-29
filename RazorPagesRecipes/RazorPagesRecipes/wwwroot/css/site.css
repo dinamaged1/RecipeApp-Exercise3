@@ -106,8 +106,9 @@ body {
 .c-categories-page {
     background-color: #efe2d5;
     height: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 0px;
+    padding-bottom:1vh;
 }
 
 .c-category-row {
@@ -132,6 +133,7 @@ body {
 
 .c-category-text {
     font-weight: 400;
+    margin-top: 1rem !important;
 }
 
 .c-category-remove-div {
@@ -237,6 +239,7 @@ body {
 .c-font-color {
     color: #8c412ab3;
 }
+
 .c-recipe-page {
     background-color: #f2f2f2;
     height: 100%;
@@ -249,20 +252,35 @@ body {
     padding-left: 100px;
 }
 
-    .c-cards-container > div {
+    .c-cards-container > .c-card-div {
         background-color: #f1f1f1;
         width: 300px;
         margin: 10px;
         text-align: center;
         font-size: 10px;
     }
+.c-circle-img-div{
+    width:298px;
+    height:298px;
+
+}
+.c-categories-container-recipe {
+    text-align: start;
+    font-size: 15px;
+}
+.c-category-btn{
+    border-radius:25px;
+    font-weight:800
+}
 
 .c-card-img {
+    object-fit: cover;
     border-radius: 50%;
     padding: 10%;
-    width:100%;
-    height:55%
+    width: 100%;
+    height: 100%;
 }
+
 .c-details-btn {
     color: black;
     text-decoration: none;
@@ -271,7 +289,7 @@ body {
     border-color: #d9c6c0b3;
     background-color: #d9c6c052;
     padding: 10px 30px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .c-add--recipe-button {
@@ -280,11 +298,73 @@ body {
     border-radius: 40px;
     border-color: #d9c6c0b3;
     font-weight: 500;
+    background-color: white;
 }
 
-.c-recipe-font{
-   
+.c-recipe-font {
 }
-.c-card-div{
-    background-color:white !important;
+
+.c-card-div {
+    background-color: white !important;
+}
+
+.c-recipe-details-page {
+    background-color: #e6cdcd;
+    height: 100%;
+    padding: 0px;
+}
+
+.c-recipe-container {
+    display: flex;
+    height: 100%;
+}
+
+.c-text-container {
+    flex-grow: 1;
+}
+
+.c-image-container {
+    flex-grow: 1;
+}
+
+.c-white-background {
+    width: 450px;
+    height: 40%;
+    background-color: white;
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 15%
+}
+
+.c-recipe-image-detail {
+    object-fit: contain;
+    position: relative;
+    width: 150%;
+    height: 150%;
+    top: 10%;
+    left: -30%;
+}
+
+.c-recipe-font {
+    font-family: 'Merienda', cursive;
+    text-align: center;
+}
+
+.c-delete-modal-title-recipe {
+    padding-left: 1.7rem !important;
+    margin-top: 6px;
+}
+
+.c-delete-confirmation-text-recipe {
+    margin-top: 5%;
+    font-size: large;
+}
+
+.c-edit-recipe-label {
+    font-size: large;
+
+}
+.c-edit-modal-content {
+    text-align:start !important;
+    font-size:medium !important;
 }

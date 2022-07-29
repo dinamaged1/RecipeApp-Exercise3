@@ -11,12 +11,17 @@ namespace RazorPagesRecipes.Pages.Recipes
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly HttpClient _httpClient;
         private IWebHostEnvironment _host;
+        [BindProperty]
         public List<string> Categories { get; set; } = new List<string>();
         public List<Recipe> Recipes { get; set; } = new List<Recipe>();
         [BindProperty]
         public IFormFile? RecipeImage { get; set; }
         [BindProperty]
         public List<bool> IsCheckedCategory { get; set; } = new List<bool>();
+        [BindProperty]
+        public Guid ChangebleId { get; set; }
+        [BindProperty]
+        public string ChangebleImagePath { get; set; }
 
         public RecipesModel(IHttpClientFactory client, IWebHostEnvironment host)
         {
@@ -24,8 +29,6 @@ namespace RazorPagesRecipes.Pages.Recipes
             _httpClient = _httpClientFactory.CreateClient("recipe");
             _host = host;
         }
-
-
         public async Task OnGet()
         {
             var httpResponseMessage =
@@ -42,11 +45,17 @@ namespace RazorPagesRecipes.Pages.Recipes
             Recipes = JsonSerializer.Deserialize<List<Recipe>>(recipeData);
 
             IsCheckedCategory = new List<bool>();
+            IsCheckedCategory = new List<bool>(Categories.Count);
             Categories.ForEach(x => IsCheckedCategory.Add(false));
         }
 
         public async Task<IActionResult> OnPostAdd()
         {
+            var httpResponseMessage =
+                await _httpClient.GetAsync($"/categories");
+            bool isRequestSucceed = httpResponseMessage.IsSuccessStatusCode;
+            var categoryData = await httpResponseMessage.Content.ReadAsStringAsync();
+            Categories = JsonSerializer.Deserialize<List<string>>(categoryData);
             Guid id = Guid.NewGuid();
 
             // Get the image uploaded 
@@ -62,7 +71,7 @@ namespace RazorPagesRecipes.Pages.Recipes
             string recipeIngredientsInput = Request.Form["ingredients"];
             List<string> ingredientsList = recipeInstructionsInput.Split('\n').ToList();
             List<string> instructionsList = recipeIngredientsInput.Split('\n').ToList();
-            string imagePath = $"../RecipesImages/{id}.{System.IO.Path.GetExtension(RecipeImage.FileName)}";
+            string imagePath = $"/RecipesImages/{id}.{System.IO.Path.GetExtension(RecipeImage.FileName)}";
             List<string> categoryList = new List<string>();
             for (int i = 0; i < IsCheckedCategory.Count; i++)
             {
@@ -71,11 +80,67 @@ namespace RazorPagesRecipes.Pages.Recipes
                     categoryList.Add(Categories[i]);
                 }
             }
-            Recipe newRecipe = new Recipe(id, recipeTitle, imagePath, instructionsList, ingredientsList, categoryList);
+            Recipe newRecipe = new Recipe(id, recipeTitle, imagePath, ingredientsList, instructionsList, categoryList);
             var recipeItemJson = new StringContent(JsonSerializer.Serialize(newRecipe), Encoding.UTF8, "application/json");
-            using var httpResponseMessage = await _httpClient.PostAsync("/recipe", recipeItemJson);
-            await OnGet();
-            return Page();
+            httpResponseMessage = await _httpClient.PostAsync("/recipe", recipeItemJson);
+            return RedirectToPage("Recipes");
+        }
+
+        public async Task<IActionResult> OnPostUpdate()
+        {
+            var httpResponseMessage =
+                await _httpClient.GetAsync($"/categories");
+            bool isRequestSucceed = httpResponseMessage.IsSuccessStatusCode;
+            var categoryData = await httpResponseMessage.Content.ReadAsStringAsync();
+            Categories = JsonSerializer.Deserialize<List<string>>(categoryData);
+
+            //Delete Image from folder RecipeImages
+            var filePathDelete = $"{_host.WebRootPath}{ChangebleImagePath}";
+            System.IO.File.Delete(filePathDelete);
+
+            // Get the image uploaded 
+            // Save it to RecipeImages folder
+            MemoryStream ms = new MemoryStream();
+            await RecipeImage.OpenReadStream().CopyToAsync(ms);
+            var data = ms.ToArray();
+            var filePath = $"{_host.WebRootPath}/RecipesImages/{ChangebleId}.{System.IO.Path.GetExtension(RecipeImage.FileName)}";
+            System.IO.File.WriteAllBytes(filePath, data);
+
+            string recipeTitle = Request.Form["title"];
+            string recipeInstructionsInput = Request.Form["instructions"];
+            string recipeIngredientsInput = Request.Form["ingredients"];
+            List<string> ingredientsList = recipeInstructionsInput.Split('\n').ToList();
+            List<string> instructionsList = recipeIngredientsInput.Split('\n').ToList();
+            string imagePath = $"/RecipesImages/{ChangebleId}.{System.IO.Path.GetExtension(RecipeImage.FileName)}";
+            List<string> categoryList = new List<string>();
+            for (int i = 0; i < IsCheckedCategory.Count; i++)
+            {
+                if (IsCheckedCategory[i] == true)
+                {
+                    categoryList.Add(Categories[i]);
+                }
+            }
+            Recipe newRecipe = new Recipe(ChangebleId, recipeTitle, imagePath, ingredientsList, instructionsList, categoryList);
+            var recipeItemJson = new StringContent(JsonSerializer.Serialize(newRecipe), Encoding.UTF8, "application/json");
+
+            httpResponseMessage =
+                await _httpClient.PutAsync($"/recipe/{newRecipe.Id}", recipeItemJson);
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+            return RedirectToPage("Recipes");
+        }
+
+        public async Task<IActionResult> OnPostDelete()
+        {
+            //Delete Image from folder RecipeImages
+            var filePath = $"{_host.WebRootPath}{ChangebleImagePath}";
+            System.IO.File.Delete(filePath);
+
+            using var httpResponseMessage =
+                await _httpClient.DeleteAsync($"/recipe/{ChangebleId}");
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+            return RedirectToPage("Recipes");
         }
     }
 }

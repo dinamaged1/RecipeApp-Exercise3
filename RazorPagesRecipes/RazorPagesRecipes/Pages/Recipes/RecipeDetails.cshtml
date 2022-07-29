@@ -1,0 +1,37 @@
+﻿@page "{id}"
+@model RazorPagesRecipes.Pages.Recipes.RecipeDetailsModel
+@{
+}
+<link href="https://fonts.googleapis.com/css2?family=Merienda&family=Scheherazade+New&display=swap" rel="stylesheet">
+<div class="c-recipe-details-page">
+    <div class="row">
+        <div class="col">
+            <h1 class="c-recipe-font pt-3">@Model.RecipeDetails.Title</h1>
+            <hr />
+            <div class="c-Ingredients ps-4 pt-5 card-body">
+                <h3>Ingredients</h3>
+                <ul>
+                    @foreach (var ingredient in Model.RecipeDetails.Ingredients)
+                    {
+                        <li>@ingredient</li>
+                    }
+
+                </ul>
+            </div>
+            <div class="c-Ingredients ps-4 pt-5 card-body">
+                <h3>Steps</h3>
+                <ol>
+                    @foreach (var instruction in Model.RecipeDetails.Instructions)
+                    {
+                        <li>@instruction</li>
+                    }
+                </ol>
+            </div>
+        </div>
+        <div class="col">
+            <div class="c-white-background">
+                <img src="@Model.RecipeDetails.Imagepath" class="c-recipe-image-detail" />
+            </div>
+        </div>
+    </div>
+</div>
