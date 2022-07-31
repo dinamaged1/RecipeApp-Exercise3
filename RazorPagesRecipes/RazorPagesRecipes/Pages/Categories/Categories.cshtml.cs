@@ -46,8 +46,7 @@ namespace RazorPagesRecipes.Pages.Categories
                 await _httpClient.PostAsync("/category", categoryItemJson);
 
             httpResponseMessage.EnsureSuccessStatusCode();
-            await OnGet();
-            return Page();
+            return RedirectToPage("Categories");
         }
 
         // Edit a category
@@ -64,8 +63,7 @@ namespace RazorPagesRecipes.Pages.Categories
                     await _httpClient.PutAsync($"/category/{CategoryOld}", newCategoryJson);
                 httpResponseMessage.EnsureSuccessStatusCode();
             }
-            await OnGet();
-            return Page();
+            return RedirectToPage("Categories");
         }
 
         public async Task<IActionResult> OnPostDelete()
@@ -74,8 +72,7 @@ namespace RazorPagesRecipes.Pages.Categories
                 await _httpClient.DeleteAsync($"/category/{ToBeDeletedCategory}");
 
             httpResponseMessage.EnsureSuccessStatusCode();
-            await OnGet();
-            return Page();
+            return RedirectToPage("Categories");
         }
     }
 }

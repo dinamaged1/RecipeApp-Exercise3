@@ -3,6 +3,7 @@
 @{
     int i = 0;
     var recipe = new RazorPagesRecipes.Models.Recipe();
+    string ingredients = "";
 }
 <div class="c-recipe-page">
     <div class="row">
@@ -56,21 +57,22 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body c-edit-modal-body">
-                                <form asp-page-handler="update" method="post" enctype="multipart/form-data" class="c-form">
+                                <form asp-page-handler="update" method="post" enctype="multipart/form-data" class="c-form" id="edit-form">
 
                                     <div class="form-group">
                                         <input type="hidden" asp-for="@Model.ChangebleId" value="@recipe.Id">
                                         <input type="hidden" asp-for="@Model.ChangebleImagePath" value="@recipe.Imagepath">
                                         <label class="c-edit-recipe-label mb-2">Recipe Title</label>
                                         <input type="text" id="RecipeTitle" class="form-control" value="@recipe.Title" name="title" required />
-                                        <label class="c-edit-recipe-label mb-2">Ingredients</label>
-                                        <textarea class="form-control" type="text" id="RecipeIngredients" value="@recipe.Ingredients" name="ingredients" required> </textarea>
-                                        <label class="c-edit-recipe-label mb-2">Instructions</label>
-                                        <textarea class="form-control" type="text" id="RecipeInstructions" value="@recipe.Instructions" name="instructions" required></textarea>
-                                        <div class="m-4"></div>
-                                        <label class="c-edit-recipe-label mb-2" asp-for="@Model.RecipeImage">Recipe Image</label>
+                                        <label class="c-edit-recipe-label mb-2 mt-2">Ingredients</label>
+                                        <textarea class="form-control" type="text" id="RecipeIngredients"
+                                              name="ingredients" rows="5" required>@string.Join($"\n",recipe.Ingredients.ToArray()) </textarea>
+                                        <label class="c-edit-recipe-label mb-2 mt-2">Instructions</label>
+                                        <textarea class="form-control" type="text" id="RecipeInstructions" name="instructions" rows="5" required>@string.Join($"\n",recipe.Instructions.ToArray())</textarea>
+                                        <div class="m-3"></div>
+                                        <label class="c-edit-recipe-label mt-2" asp-for="@Model.RecipeImage">Recipe Image</label>
                                         <input class="form-control" asp-for="@Model.RecipeImage" type="file" required />
-                                        <div class="m-4"></div>
+                                        <div class="m-3"></div>
                                         <div class="flex-column justify-content-start form-group">
                                             @for (int j = 0; j < @Model.Categories.Count; j++)
                                             {
@@ -85,13 +87,13 @@
                                             }
                                         </div>
                                     </div>
-
-                                    <div class="modal-footer c-modal-footer">
+                                    <div class="modal-footer c-modal-footer c-modal-footer--sticky">
                                         <button type="button" class="btn c-cancel-button" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                                         <button type="submit" class="btn c-confirm-button">Confirm</button>
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -127,6 +129,7 @@
     </div>
 </div>
 
+<!-- Add Modal -->
 <div class="modal fade" id="addModalRecipe" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -139,11 +142,11 @@
 
                     <div class="form-group">
                         <label class="mb-2">Recipe Title</label>
-                        <input type="text" id="RecipeTitle" class="form-control" value="" name="title" required />
+                        <input type="text" id="RecipeTitle" class="form-control" name="title" required />
                         <label class="mb-2">Ingredients</label>
-                        <textarea class="form-control" type="text" id="RecipeIngredients" value="" name="ingredients" required> </textarea>
+                        <textarea class="form-control" type="text" id="RecipeIngredients" name="ingredients" required> </textarea>
                         <label class="mb-2">Instructions</label>
-                        <textarea class="form-control" type="text" id="RecipeInstructions" value="" name="instructions" required></textarea>
+                        <textarea class="form-control" type="text" id="RecipeInstructions" name="instructions" required></textarea>
                         <div class="m-4"></div>
                         <label class="mb-2" asp-for="@Model.RecipeImage">Recipe Image</label>
                         <input class="form-control" asp-for="@Model.RecipeImage" type="file" required />

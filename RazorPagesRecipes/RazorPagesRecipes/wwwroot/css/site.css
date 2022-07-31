@@ -376,11 +376,15 @@ body {
 
 .c-edit-recipe-label {
     font-size: large;
-
 }
+.c-modal-footer--sticky {
+    position: sticky;
+    top:0;
+}
+
 .c-edit-modal-content {
-    text-align:start !important;
-    font-size:medium !important;
+    text-align: start !important;
+    font-size: medium !important;
 }
 
 @media screen and (max-width: 1360px) {
