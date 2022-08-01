@@ -13,11 +13,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 
@@ -46,12 +50,13 @@ app.MapGet("/recipes", () =>
 {
     if (recipesList != null)
         return Results.Ok(recipesList);
-    else 
+    else
         return Results.NoContent();
 }).WithName("GetRecipes");
 
 //Get specific  recipe
-app.MapGet("/recipe/{id}", (Guid id) => {
+app.MapGet("/recipe/{id}", (Guid id) =>
+{
     var selectedRecipeIndex = recipesList.FindIndex(x => x.Id == id);
     if (selectedRecipeIndex != -1)
     {
@@ -88,10 +93,10 @@ app.MapPut("/recipe/{id}", async (Guid id, [FromBody] Recipe newRecipeData) =>
 });
 
 //Remove recipe
-app.MapDelete("/recipe/{id}",async (Guid id) =>
+app.MapDelete("/recipe/{id}", async (Guid id) =>
 {
     var selectedRecipeIndex = recipesList.FindIndex(x => x.Id == id);
-    if(selectedRecipeIndex != -1)
+    if (selectedRecipeIndex != -1)
     {
         recipesList.Remove(recipesList[selectedRecipeIndex]);
         await SaveRecipeToJson();
@@ -157,7 +162,7 @@ app.MapPut("/category/{name}", async (string name, [FromBody] string newCategory
 });
 
 //Delete Category
-app.MapDelete("category/{name}",async (string name) =>
+app.MapDelete("category/{name}", async (string name) =>
 {
     if (categoryList.Contains(name))
     {
