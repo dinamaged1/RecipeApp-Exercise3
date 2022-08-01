@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 using System.Text.Json;
@@ -83,6 +83,15 @@ namespace RazorPagesRecipes.Pages.Recipes
             Recipe newRecipe = new Recipe(id, recipeTitle, imagePath, ingredientsList, instructionsList, categoryList);
             var recipeItemJson = new StringContent(JsonSerializer.Serialize(newRecipe), Encoding.UTF8, "application/json");
             httpResponseMessage = await _httpClient.PostAsync("/recipe", recipeItemJson);
+            try { httpResponseMessage.EnsureSuccessStatusCode(); }
+            catch (Exception ex)
+            {
+                TempData["confirmation"] = "failed";
+                TempData["details"] = $"{recipeTitle} recipe already exist!";
+                return RedirectToPage("Recipes");
+            }
+            TempData["confirmation"] = "succeed";
+            TempData["details"] = $"{recipeTitle} recipe added successfully 😁";
             return RedirectToPage("Recipes");
         }
 
@@ -127,7 +136,15 @@ namespace RazorPagesRecipes.Pages.Recipes
             httpResponseMessage =
                 await _httpClient.PutAsync($"/recipe/{ChangebleId}", recipeItemJson);
 
-            httpResponseMessage.EnsureSuccessStatusCode();
+            try { httpResponseMessage.EnsureSuccessStatusCode(); }
+            catch (Exception ex)
+            {
+                TempData["confirmation"] = "failed";
+                TempData["details"] = $"Error occurred while editing! Please try again later";
+                return RedirectToPage("Recipes");
+            }
+            TempData["confirmation"] = "succeed";
+            TempData["details"] = $"Recipe edited successfully 😁";
             return RedirectToPage("Recipes");
         }
 
@@ -140,7 +157,15 @@ namespace RazorPagesRecipes.Pages.Recipes
             using var httpResponseMessage =
                 await _httpClient.DeleteAsync($"/recipe/{ChangebleId}");
 
-            httpResponseMessage.EnsureSuccessStatusCode();
+            try { httpResponseMessage.EnsureSuccessStatusCode(); }
+            catch (Exception ex)
+            {
+                TempData["confirmation"] = "failed";
+                TempData["details"] = $"Error occurred while deleting recipe. Please try again later";
+                return RedirectToPage("Recipes");
+            }
+            TempData["confirmation"] = "succeed";
+            TempData["details"] = $"Recipe deleted successfully";
             return RedirectToPage("Recipes");
         }
     }

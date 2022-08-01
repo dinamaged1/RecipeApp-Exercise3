@@ -81,7 +81,7 @@ namespace RazorPagesRecipes.Pages.Categories
                     return RedirectToPage("Categories");
                 }
                 TempData["confirmation"] = "succeed";
-                TempData["details"] = $"{CategoryOld} category Edited successfully 😁";
+                TempData["details"] = $"{CategoryOld} category edited successfully 😁";
                 return RedirectToPage("Categories");
             }
             else
@@ -95,16 +95,15 @@ namespace RazorPagesRecipes.Pages.Categories
             using var httpResponseMessage =
                 await _httpClient.DeleteAsync($"/category/{ToBeDeletedCategory}");
 
-            httpResponseMessage.EnsureSuccessStatusCode();
             try { httpResponseMessage.EnsureSuccessStatusCode(); }
             catch (Exception ex)
             {
                 TempData["confirmation"] = "failed";
-                TempData["details"] = $"Error occurred while deleting {ToBeDeletedCategory} category 😥.. \n Please try again later";
+                TempData["details"] = $"Error occurred while deleting {ToBeDeletedCategory} category. Please try again later";
                 return RedirectToPage("Categories");
             }
             TempData["confirmation"] = "succeed";
-            TempData["details"] = $"{ToBeDeletedCategory} category deleted successfully 😁";
+            TempData["details"] = $"{ToBeDeletedCategory} category deleted successfully";
             return RedirectToPage("Categories");
         }
     }

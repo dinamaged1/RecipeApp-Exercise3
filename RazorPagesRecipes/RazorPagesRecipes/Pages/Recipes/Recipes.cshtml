@@ -174,10 +174,20 @@
     </div>
 </div>
 <script>
+    if (`@TempData["confirmation"]` == "succeed") {
+        Swal.fire({
+            icon: 'success',
+            title: `@TempData["details"]`,
+            showConfirmButton: false,
+            timer: 3000
+        })
+    }
+    else if(`@TempData["confirmation"]` == "failed") {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: `@TempData["details"]`,
         })
+    }
 </script>
 
