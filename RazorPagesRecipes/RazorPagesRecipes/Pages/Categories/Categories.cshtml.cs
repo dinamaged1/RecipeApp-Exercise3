@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesRecipes;
 using System.Text;
@@ -18,11 +18,15 @@ namespace RazorPagesRecipes.Pages.Categories
         public string CategoryOld { get; set; }
         [BindProperty]
         public string ToBeDeletedCategory { get; set; }
+        [BindProperty]
+        public string Message { get; set; }
+
         public CategoriesModel(IHttpClientFactory client)
         {
             _httpClientFactory = client;
             _httpClient = _httpClientFactory.CreateClient("recipe");
         }
+
 
         // Get all categories
         public async Task OnGet()
@@ -44,9 +48,17 @@ namespace RazorPagesRecipes.Pages.Categories
 
             using var httpResponseMessage =
                 await _httpClient.PostAsync("/category", categoryItemJson);
-
-            httpResponseMessage.EnsureSuccessStatusCode();
+            try { httpResponseMessage.EnsureSuccessStatusCode(); }
+            catch (Exception ex)
+            {
+                TempData["confirmation"] = "failed";
+                TempData["details"] = $"{CategoryNew} category already exist!";
+                return RedirectToPage("Categories");
+            }
+            TempData["confirmation"] = "succeed";
+            TempData["details"]= $"{CategoryNew} category added successfully 😁";
             return RedirectToPage("Categories");
+
         }
 
         // Edit a category
@@ -61,9 +73,21 @@ namespace RazorPagesRecipes.Pages.Categories
 
                 using var httpResponseMessage =
                     await _httpClient.PutAsync($"/category/{CategoryOld}", newCategoryJson);
-                httpResponseMessage.EnsureSuccessStatusCode();
+                try { httpResponseMessage.EnsureSuccessStatusCode(); }
+                catch (Exception ex)
+                {
+                    TempData["confirmation"] = "failed";
+                    TempData["details"] = $"Error occurred while editing {CategoryOld} category! Please try again later";
+                    return RedirectToPage("Categories");
+                }
+                TempData["confirmation"] = "succeed";
+                TempData["details"] = $"{CategoryOld} category Edited successfully 😁";
+                return RedirectToPage("Categories");
             }
-            return RedirectToPage("Categories");
+            else
+            {
+                return RedirectToPage("Categories");
+            }
         }
 
         public async Task<IActionResult> OnPostDelete()
@@ -72,6 +96,15 @@ namespace RazorPagesRecipes.Pages.Categories
                 await _httpClient.DeleteAsync($"/category/{ToBeDeletedCategory}");
 
             httpResponseMessage.EnsureSuccessStatusCode();
+            try { httpResponseMessage.EnsureSuccessStatusCode(); }
+            catch (Exception ex)
+            {
+                TempData["confirmation"] = "failed";
+                TempData["details"] = $"Error occurred while deleting {ToBeDeletedCategory} category 😥.. \n Please try again later";
+                return RedirectToPage("Categories");
+            }
+            TempData["confirmation"] = "succeed";
+            TempData["details"] = $"{ToBeDeletedCategory} category deleted successfully 😁";
             return RedirectToPage("Categories");
         }
     }
