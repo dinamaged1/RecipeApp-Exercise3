@@ -108,8 +108,9 @@ body {
     height: 100%;
     min-height: 100vh;
     padding: 0px;
-    padding-bottom:1vh;
+    padding-bottom: 1vh;
 }
+
 .c-categories-header {
     flex: 0 0 auto;
 }
@@ -265,18 +266,20 @@ body {
         text-align: center;
         font-size: 10px;
     }
-.c-circle-img-div{
-    width:298px;
-    height:298px;
 
+.c-circle-img-div {
+    width: 298px;
+    height: 298px;
 }
+
 .c-categories-container-recipe {
     text-align: start;
     font-size: 15px;
 }
-.c-category-btn{
-    border-radius:25px;
-    font-weight:800
+
+.c-category-btn {
+    border-radius: 25px;
+    font-weight: 800
 }
 
 .c-card-img {
@@ -317,7 +320,7 @@ body {
 .c-recipe-details-page {
     background-color: #e6cdcd;
     height: 100%;
-    min-height:95vh;
+    min-height: 95vh;
     padding: 0px;
 }
 
@@ -351,18 +354,19 @@ body {
     min-height: 122%;
     min-width: 100%;
     max-height: 125%;
-    max-width:105%;
+    max-width: 105%;
 }
+
 .c-recipe-image-detail {
-    object-fit:cover;
+    object-fit: cover;
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     right: 0;
-    border-width:11px;
-    border-style:solid;
-    border-color:white;
+    border-width: 11px;
+    border-style: solid;
+    border-color: white;
 }
 
 .c-recipe-font {
@@ -383,9 +387,10 @@ body {
 .c-edit-recipe-label {
     font-size: large;
 }
+
 .c-modal-footer--sticky {
     position: sticky;
-    top:0;
+    top: 0;
 }
 
 .c-edit-modal-content {
@@ -398,8 +403,9 @@ body {
         width: 400px;
         height: 387px;
     }
+
     .c-add-button {
-        margin-right:10%
+        margin-right: 10%
     }
 }
 
@@ -409,17 +415,19 @@ body {
         height: 335px;
     }
 }
+
 @media screen and (max-width: 664px) {
     .c-recipe-header {
         flex: 0 0 auto;
         width: 55%;
     }
+
     .c-add-button {
         margin-right: 13%
     }
 }
 
-@media screen and (max-width: 735px){
+@media screen and (max-width: 735px) {
     .c-cards-container {
         padding-left: 3%;
     }
@@ -429,6 +437,6 @@ body {
         }
 
     .c-circle-img-div {
-        align-self:center;
+        align-self: center;
     }
 }
