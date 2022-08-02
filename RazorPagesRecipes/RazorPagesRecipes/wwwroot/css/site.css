@@ -110,6 +110,9 @@ body {
     padding: 0px;
     padding-bottom:1vh;
 }
+.c-categories-header {
+    flex: 0 0 auto;
+}
 
 .c-category-row {
     background-color: white;
@@ -176,6 +179,8 @@ body {
     border-radius: 40px;
     border-color: black;
     font-weight: 500;
+    float:right;
+    margin-right:7%;
 }
 
 .c-edit-modal-body {
@@ -392,6 +397,9 @@ body {
         width: 400px;
         height: 387px;
     }
+    .c-add-button {
+        margin-right:10%
+    }
 }
 
 @media screen and (max-width: 1219px) {
@@ -404,5 +412,8 @@ body {
     .c-recipe-header {
         flex: 0 0 auto;
         width: 55%;
+    }
+    .c-add-button {
+        margin-right: 13%
     }
 }

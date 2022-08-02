@@ -1,10 +1,11 @@
-﻿@page
+﻿@page 
 @model RazorPagesRecipes.Pages.Recipes.RecipesModel
 @{
+    ViewData["Title"] = "Recipes";
     int i = 0;
     var recipe = new RazorPagesRecipes.Models.Recipe();
-    string ingredients = "";
 }
+
 <div class="c-recipe-page">
     <div class="row">
         <h1 class="col-9 c-font c-recipe-header c-font-color pt-5 ms-5">
