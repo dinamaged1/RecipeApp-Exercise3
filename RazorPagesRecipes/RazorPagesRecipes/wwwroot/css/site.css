@@ -179,8 +179,9 @@ body {
     border-radius: 40px;
     border-color: black;
     font-weight: 500;
-    float:right;
-    margin-right:7%;
+    float: right;
+    margin-right: 7%;
+    margin-top: auto;
 }
 
 .c-edit-modal-body {
