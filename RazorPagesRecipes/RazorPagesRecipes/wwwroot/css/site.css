@@ -298,15 +298,18 @@ body {
     padding: 10px 30px;
     cursor: pointer;
 }
+    .c-details-btn:hover {
+        background-color: #95422852;
+    }
 
-.c-add--recipe-button {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 40px;
-    border-color: #d9c6c0b3;
-    font-weight: 500;
-    background-color: white;
-}
+    .c-add--recipe-button {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 40px;
+        border-color: #d9c6c0b3;
+        font-weight: 500;
+        background-color: white;
+    }
 
 .c-recipe-font {
 }
