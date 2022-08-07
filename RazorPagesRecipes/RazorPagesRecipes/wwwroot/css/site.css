@@ -15,6 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    overflow-x: hidden
 }
 
 .c-header {
@@ -44,15 +45,13 @@ body {
 .c-first-color {
     height: 483px;
     background-color: #efe2d5;
-    padding: 0px !important;
     margin: 0px !important;
     position: relative;
 }
 
 .c-text-block {
-    position: absolute;
     top: 23%;
-    left: 30%;
+    margin-left: 2%;
 }
 
 .c-first-text {
@@ -71,7 +70,7 @@ body {
     border-style: solid;
     border-width: 1px;
     margin: 30px auto 0 0;
-    padding: 10px 30px;
+    padding: 3% 4%;
 }
 
     .c-read-more-button:hover {
@@ -79,20 +78,14 @@ body {
     }
 
 .c-second-color-div {
-    position: absolute;
-    top: 37%;
-    margin: 3%;
-    display: flex;
+    min-height: 20vh;
 }
 
 .c-first-img-home {
-    position: relative;
-    left: 8%;
+    padding-top: 24vh;
 }
 
 .c-third-img-home {
-    position: relative;
-    bottom: 100px;
 }
 
 .c-shadow {
@@ -369,6 +362,23 @@ body {
     border-color: white;
 }
 
+.c-image-container-details-first-col {
+    max-width: 55%;
+    max-height: 47%;
+    margin-left:25%
+}
+.c-recipe-image-detail-first-col {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+
+
+}
 .c-recipe-font {
     font-family: 'Merienda', cursive;
     text-align: center;
@@ -416,6 +426,13 @@ body {
     }
 }
 
+@media screen and (max-width: 1219px) {
+    .c-white-background {
+        width: 33vw;
+        height: 30vw;
+    }
+}
+
 @media screen and (max-width: 664px) {
     .c-recipe-header {
         flex: 0 0 auto;
@@ -439,4 +456,45 @@ body {
     .c-circle-img-div {
         align-self: center;
     }
+    .c-recipe-img-col{
+        display:none;
+    }
 }
+@media screen and (min-width: 735px) {
+    .c-image-container-details-first-col{
+        display:none;
+    }
+}
+
+    @media screen and (max-width: 760px) {
+        .c-second-color-div {
+            min-height: 82vh;
+        }
+
+        .c-first-img-home {
+            margin-bottom: 2.5%
+        }
+
+        .c-first-img-home-copy {
+            margin-bottom: 3%
+        }
+    }
+
+    @media screen and (max-width: 566px) {
+        .c-first-img-home {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 566px) {
+        .c-first-img-home-copy {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .c-text-block {
+            min-width: 100% !important;
+            margin-bottom: 10%;
+        }
+    }
