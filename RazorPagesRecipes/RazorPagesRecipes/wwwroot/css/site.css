@@ -365,8 +365,9 @@ body {
 .c-image-container-details-first-col {
     max-width: 55%;
     max-height: 47%;
-    margin-left:25%
+    margin-left: 25%
 }
+
 .c-recipe-image-detail-first-col {
     object-fit: cover;
     width: 100%;
@@ -376,9 +377,8 @@ body {
     border-width: 5px;
     border-style: solid;
     border-color: white;
-
-
 }
+
 .c-recipe-font {
     font-family: 'Merienda', cursive;
     text-align: center;
@@ -456,45 +456,57 @@ body {
     .c-circle-img-div {
         align-self: center;
     }
-    .c-recipe-img-col{
-        display:none;
+
+    .c-recipe-img-col {
+        display: none;
     }
 }
+
 @media screen and (min-width: 735px) {
-    .c-image-container-details-first-col{
-        display:none;
+    .c-image-container-details-first-col {
+        display: none;
     }
 }
 
-    @media screen and (max-width: 760px) {
-        .c-second-color-div {
-            min-height: 82vh;
-        }
-
-        .c-first-img-home {
-            margin-bottom: 2.5%
-        }
-
-        .c-first-img-home-copy {
-            margin-bottom: 3%
-        }
+@media screen and (max-width: 760px) {
+    .c-second-color-div {
+        min-height: 82vh;
     }
 
-    @media screen and (max-width: 566px) {
-        .c-first-img-home {
-            display: none;
-        }
+    .c-first-img-home {
+        margin-bottom: 2.5%
     }
 
-    @media screen and (min-width: 566px) {
-        .c-first-img-home-copy {
-            display: none;
-        }
+    .c-first-img-home-copy {
+        margin-bottom: 3%
     }
 
-    @media screen and (max-width: 500px) {
-        .c-text-block {
-            min-width: 100% !important;
-            margin-bottom: 10%;
-        }
+    .logo-image {
+        width: 250px;
     }
+}
+
+@media screen and (max-width: 566px) {
+    .c-first-img-home {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 566px) {
+    .c-first-img-home-copy {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .c-text-block {
+        min-width: 100% !important;
+        margin-bottom: 10%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .logo-image {
+        width: 150px;
+    }
+}
