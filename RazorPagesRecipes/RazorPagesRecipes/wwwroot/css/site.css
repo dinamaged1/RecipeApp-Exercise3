@@ -1,3 +1,8 @@
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+}
+
 html {
     font-size: 14px;
 }
@@ -363,9 +368,12 @@ body {
 }
 
 .c-image-container-details-first-col {
-    max-width: 55%;
-    max-height: 47%;
-    margin-left: 25%
+    width: 50%;
+    height: 39%;
+    margin-left: 25%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
 }
 
 .c-recipe-image-detail-first-col {
@@ -374,9 +382,6 @@ body {
     height: 100%;
     top: 0;
     right: 0;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white;
 }
 
 .c-recipe-font {

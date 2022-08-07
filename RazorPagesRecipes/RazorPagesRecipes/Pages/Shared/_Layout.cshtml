@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav" style="margin-left:auto">
                         <a class="nav-link c-nav-link @((string?)ViewData["Title"]=="Home page" ? "active":"") m-2" asp-area="" asp-page="/Index">Home</a>
-                        <a class="nav-link c-nav-link @((string?)ViewData["Title"]=="Recipes" ? "active":"") m-2" asp-page="/Recipes/Recipes">Recipes</a>
+                        <a class="nav-link c-nav-link @(ViewData["Title"] as string=="Recipes" ||   ViewData["Title"] as string=="Recipe Details" ? "active":"") m-2" asp-page="/Recipes/Recipes">Recipes</a>
                         <a class="nav-link c-nav-link @((string?)ViewData["Title"]=="Categories" ? "active":"") m-2" asp-page="/Categories/Categories">Categories</a>
                         <a class="nav-link c-nav-link m-2" asp-area="" asp-page="/Privacy" >Privacy</a>
                     </div>

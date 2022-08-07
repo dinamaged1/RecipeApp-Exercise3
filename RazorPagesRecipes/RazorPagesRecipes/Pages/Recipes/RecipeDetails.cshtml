@@ -1,9 +1,11 @@
 ﻿@page "{id}"
 @model RazorPagesRecipes.Pages.Recipes.RecipeDetailsModel
 @{
+    ViewData["Title"] = "Recipe Details";
 }
 <link href="https://fonts.googleapis.com/css2?family=Merienda&family=Scheherazade+New&display=swap" rel="stylesheet">
-<div class="c-recipe-details-page">
+
+<div class="c-recipe-details-page" id="detailspage">
     <div class="row">
         <div class="col">
             <h1 class="c-recipe-font pt-3">@Model.RecipeDetails.Title</h1>
@@ -40,3 +42,5 @@
         </div>
     </div>
 </div>
+
+
